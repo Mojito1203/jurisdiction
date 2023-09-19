@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @Component
 public class CaptchaFilter extends OncePerRequestFilter {
-    private final String Login="/login";
+    private final String Login="/user/login";
     @Autowired
     private RedisUtil redisUtil;
     @Autowired

@@ -20,16 +20,18 @@ import java.util.HashMap;
 
 @Component
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
-	@Autowired
+    @Autowired
     private SysUserService sysUserService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         response.setContentType("application/json;charset=utf-8");
-        ServletOutputStream out = response.getOutputStream();
-        HashMap<String, Object> map = new HashMap<>();
         //获取当前登录用户的用户名
         String username = authentication.getName();
+        ServletOutputStream out = response.getOutputStream();
+        HashMap<String, Object> map = new HashMap<>();
+        SysUser sysUser = sysUserService.getSysUser(username);
+        map.put("id", sysUser.getId());
         map.put("username", username);
         //生成JWT
         String jwt = JwtUtils.generateJwt(map);

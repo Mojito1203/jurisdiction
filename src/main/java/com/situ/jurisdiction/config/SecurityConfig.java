@@ -1,6 +1,9 @@
 package com.situ.jurisdiction.config;
 
 import com.situ.jurisdiction.filter.CaptchaFilter;
+import com.situ.jurisdiction.filter.JwtAuthenticationFilter;
+import com.situ.jurisdiction.security.JwtAccessDeniedHandler;
+import com.situ.jurisdiction.security.JwtAuthenticationEntryPoint;
 import com.situ.jurisdiction.security.LoginFailureHandler;
 import com.situ.jurisdiction.security.LoginSuccessHandler;
 import com.situ.jurisdiction.service.impl.UserDetailsServiceImpl;
@@ -29,10 +32,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private LoginSuccessHandler loginSuccessHandler;
 
+    @Autowired
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
+    @Autowired
+    private JwtAccessDeniedHandler jwtAccessDeniedHandler;
+
     //白名单
     public static final String[] URL_WHITELIST = {
             "/code",
-            "/login",
+            "/user/login",
             "/logout",
     };
 
@@ -48,10 +57,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService);
     }
 
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
+        JwtAuthenticationFilter filter = new JwtAuthenticationFilter(authenticationManager());
+        return filter;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .formLogin()
+                .loginProcessingUrl("/user/login") //配置请求的地址
                 .failureHandler(loginFailureHandler) //配置登录失败处理器
                 .successHandler(loginSuccessHandler)
                 .and()
@@ -62,6 +78,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //不会创建 session
                 .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler) //配置无权限数据返回的处理器
+                .and()
+                .addFilter(jwtAuthenticationFilter())
                 //登录验证码校验过滤器放在UsernamePasswordAuthenticationFilter之前
                 .addFilterBefore(captchaFilter, UsernamePasswordAuthenticationFilter.class);
     }

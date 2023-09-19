@@ -2,6 +2,9 @@ package com.situ.jurisdiction.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 /**
@@ -25,13 +28,16 @@ public class SysMenu implements Serializable {
 
     private String icon;
 
-    private Integer ordernum;
+    private Integer orderNum;
 
     private Date created;
 
     private Date updated;
 
-    private Integer statu;
+    private Integer status;
+
+    @TableField(exist = false)
+    private List<SysMenu> children;
 
     private static final long serialVersionUID = 1L;
 }
