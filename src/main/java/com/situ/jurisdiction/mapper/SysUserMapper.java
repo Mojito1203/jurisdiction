@@ -4,6 +4,8 @@ import com.situ.jurisdiction.entity.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
 * @author ZZQ
 * @description 针对表【sys_user】的数据库操作Mapper
@@ -13,6 +15,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
+    SysUser findById(Long id);
+
+    List<SysUser> findAll();
 }
 
 

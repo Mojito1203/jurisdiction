@@ -1,6 +1,8 @@
 package com.situ.jurisdiction.entity;
 
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -8,6 +10,8 @@ import lombok.Data;
  */
 @Data
 public class SysUserRole implements Serializable {
+
+    @JsonFormat(shape =JsonFormat.Shape.STRING )
     private Long id;
 
     private Long userId;

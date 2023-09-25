@@ -4,32 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ac43037-ae1a-4874-ab88-cd943cb92702" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/config/CorsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/controller/SysMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/dto/SysMenuDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/filter/JwtAuthenticationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/security/JwtAccessDeniedHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/security/JwtAuthenticationEntryPoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3750940f-a738-4f24-9b19-de3f3e2b30b2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3750940f-a738-4f24-9b19-de3f3e2b30b2/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3750940f-a738-4f24-9b19-de3f3e2b30b2/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3750940f-a738-4f24-9b19-de3f3e2b30b2/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/3750940f-a738-4f24-9b19-de3f3e2b30b2/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
+    <list default="true" id="0ac43037-ae1a-4874-ab88-cd943cb92702" name="Changes" comment="权限框架完成">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/config/MyObjectHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/controller/BaseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/controller/SysRoleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/controller/SysUserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/controller/SysMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/controller/SysMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/entity/SysMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/entity/SysMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/filter/CaptchaFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/filter/CaptchaFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/entity/SysRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/entity/SysRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/entity/SysUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/entity/SysUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/entity/SysUserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/entity/SysUserRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/mapper/SysRoleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/mapper/SysRoleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/mapper/SysUserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/mapper/SysUserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/security/LoginSuccessHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/security/LoginSuccessHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/SysMenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/SysMenuService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/SysRoleMenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/SysRoleMenuService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/SysRoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/SysRoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/SysUserRoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/SysUserRoleService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/SysUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/SysUserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/impl/SysMenuServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/impl/SysMenuServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/impl/SysRoleMenuServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/impl/SysRoleMenuServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/impl/SysRoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/impl/SysRoleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/impl/SysUserRoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/impl/SysUserRoleServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/impl/SysUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/impl/SysUserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/impl/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/situ/jurisdiction/service/impl/UserDetailsServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/situ/jurisdiction/mapper/SysRoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/situ/jurisdiction/mapper/SysRoleMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/situ/jurisdiction/mapper/SysUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/situ/jurisdiction/mapper/SysUserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/situ/jurisdiction/JurisdictionApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/situ/jurisdiction/JurisdictionApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +111,9 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\IDEATestSpace\jurisdiction\src\main\resources\com\situ\jurisdiction" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.situ.jurisdiction.config" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
@@ -166,12 +172,30 @@
       <workItem from="1694997484653" duration="716000" />
       <workItem from="1695023387628" duration="79000" />
       <workItem from="1695023475532" duration="10294000" />
-      <workItem from="1695083869568" duration="23496000" />
+      <workItem from="1695083869568" duration="23559000" />
+      <workItem from="1695169944954" duration="17796000" />
+      <workItem from="1695256715648" duration="5855000" />
+      <workItem from="1695365548960" duration="19000" />
+      <workItem from="1695365676002" duration="6507000" />
+      <workItem from="1695429798148" duration="8226000" />
+      <workItem from="1695603338017" duration="2820000" />
     </task>
+    <task id="LOCAL-00001" summary="权限框架完成">
+      <created>1695135090157</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1695135090157</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="权限框架完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="权限框架完成" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

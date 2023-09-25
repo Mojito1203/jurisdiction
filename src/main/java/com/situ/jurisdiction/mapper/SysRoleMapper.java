@@ -4,6 +4,9 @@ import com.situ.jurisdiction.entity.SysRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 /**
 * @author ZZQ
 * @description 针对表【sys_role】的数据库操作Mapper
@@ -13,6 +16,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 
+    List<Map<String, Integer>> selectRoleMenuCount();
 }
 
 

@@ -27,5 +27,20 @@ public interface SysUserService extends IService<SysUser> {
 
     void clearUserAuthorityInfoByMenuId(Long menuId);
 
+    //void add(SysUser sysUser, Long[] roleIds) throws Exception;
+    void del(Long id) throws Exception;
+    //void update(SysUser sysUser, Long[] roleIds) throws Exception;
+    //添加用户
+    boolean insert(SysUser sysUser) throws Exception;
+    //修改用户
+    boolean make(SysUser sysUser) throws Exception;
+
+    boolean updatePwd(Long id, String oldPwd, String newPwd, String newAgainPwd) throws Exception;
+
+    List<SysUser> findAll();
+
+    SysUser findById(Long id);
+    List<Long> findRolesByUserId(Long userId);
+
 
 }

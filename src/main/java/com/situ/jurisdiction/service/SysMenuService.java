@@ -19,4 +19,11 @@ public interface SysMenuService extends IService<SysMenu> {
     //查询所有菜单
     List<SysMenu> getAllMenu();
 
+    void add(SysMenu sysMenu) throws Exception;
+
+    void make(SysMenu sysMenu) throws Exception;
+
+    void del(Long id) throws Exception;
+
+    List<Long> getMenuIdsByRoleId(Long roleId);
 }

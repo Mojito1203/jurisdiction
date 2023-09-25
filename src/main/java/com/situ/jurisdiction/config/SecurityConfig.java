@@ -69,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginProcessingUrl("/user/login") //配置请求的地址
                 .failureHandler(loginFailureHandler) //配置登录失败处理器
-                .successHandler(loginSuccessHandler)
+                .successHandler(loginSuccessHandler) //配置登录成功处理器
                 .and()
                 .authorizeRequests()
                 .antMatchers(URL_WHITELIST).permitAll() //白名单放行

@@ -10,4 +10,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface SysRoleMenuService extends IService<SysRoleMenu> {
 
+    void setMenusByRoleId(Long[] menuIds, Long roleId);
 }

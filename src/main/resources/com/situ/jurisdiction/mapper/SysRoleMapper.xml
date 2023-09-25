@@ -19,4 +19,11 @@
         remark,created,updated,
         statu
     </sql>
+    <select id="selectRoleMenuCount" resultType="java.util.Map">
+        SELECT sr.name, count(*) as `count`
+        FROM `sys_role` sr,
+             `sys_role_menu` srm
+        where sr.id = srm.role_id
+        GROUP BY sr.name
+    </select>
 </mapper>

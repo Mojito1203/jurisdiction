@@ -4,18 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.situ.jurisdiction.mapper.SysUserMapper">
 
-    <resultMap id="BaseResultMap" type="com.situ.jurisdiction.entity.SysUser">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="username" column="username" jdbcType="VARCHAR"/>
-            <result property="password" column="password" jdbcType="VARCHAR"/>
-            <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
-            <result property="email" column="email" jdbcType="VARCHAR"/>
-            <result property="city" column="city" jdbcType="VARCHAR"/>
-            <result property="created" column="created" jdbcType="TIMESTAMP"/>
-            <result property="updated" column="updated" jdbcType="TIMESTAMP"/>
-            <result property="lastLogin" column="last_login" jdbcType="TIMESTAMP"/>
-            <result property="statu" column="statu" jdbcType="INTEGER"/>
-    </resultMap>
 
     <sql id="Base_Column_List">
         id,username,password,
@@ -23,4 +11,55 @@
         created,updated,last_login,
         statu
     </sql>
+
+    <resultMap id="BaseResultMap" type="com.situ.jurisdiction.entity.SysUser">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="city" column="city" jdbcType="VARCHAR"/>
+        <result property="created" column="created" jdbcType="TIMESTAMP"/>
+        <result property="updated" column="updated" jdbcType="TIMESTAMP"/>
+        <result property="lastLogin" column="last_login" jdbcType="TIMESTAMP"/>
+        <result property="statu" column="statu" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="userMap" type="com.situ.jurisdiction.entity.SysUser">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="avatar" property="avatar" />
+        <result column="email" property="email" />
+        <result column="city" property="city" />
+        <result column="created" property="created" />
+        <result column="updated" property="updated" />
+        <result column="last_login" property="lastLogin" />
+        <result column="statu" property="statu" />
+        <collection property="roles" ofType="com.situ.jurisdiction.entity.SysRole">
+            <id column="rid" property="id" />
+            <result column="name" property="name" />
+            <result column="code" property="code" />
+            <result column="remark" property="remark" />
+            <result column="created" property="created" />
+            <result column="updated" property="updated" />
+            <result column="statu" property="statu" />
+        </collection>
+    </resultMap>
+
+    <select id="findAll" resultType="com.situ.jurisdiction.entity.SysUser" resultMap="userMap">
+        SELECT
+            u.*, r.id rid, r.name name, r.code code, r.remark remark, r.created created, r.updated updated,r.statu statu
+        FROM sys_user u
+                 LEFT JOIN sys_user_role ur ON u.id=ur.user_id
+                 LEFT JOIN sys_role r ON r.id=ur.role_id
+    </select>
+    <select id="findById" resultMap="userMap">
+        SELECT
+            u.*, r.id rid, r.name name, r.code code, r.remark remark, r.created created, r.updated updated,r.statu statu
+        FROM sys_user u
+                 LEFT JOIN sys_user_role ur ON u.id=ur.user_id
+                 LEFT JOIN sys_role r ON r.id=ur.role_id
+        WHERE u.id=#{id}
+    </select>
 </mapper>

@@ -7,7 +7,9 @@ import com.situ.jurisdiction.mapper.*;
 import com.situ.jurisdiction.service.SysUserService;
 import com.situ.jurisdiction.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,6 +35,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Autowired
     private RedisUtil redisUtil;
+
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
     @Override
     public SysUser getSysUser(String username) {
@@ -86,7 +91,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public void clearUserAuthorityInfoByRoleId(Long roleId) {
-        List<SysUserRole> userRoleList = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().in("roleId", roleId));
+        List<SysUserRole> userRoleList = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().in("role_id", roleId));
         userRoleList.stream().forEach(userRoleStream -> clearUserAuthorityInfo(userRoleStream.getUserId()));
     }
 
@@ -97,9 +102,88 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         List<Long> roleIdList = sysRoleMenus.stream().map(sysRoleMenu -> sysRoleMenu.getRoleId()).collect(Collectors.toList());
 
         //获取角色对应的用户id
-        List<SysUserRole> sysUserRoles = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().in("role_id", roleIdList));
+        List<SysUserRole> sysUserRoles = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().in(roleIdList.size()>0,"role_id", roleIdList));
 
         sysUserRoles.stream().forEach(sysUserRole -> clearUserAuthorityInfo(sysUserRole.getUserId()));
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void del(Long id) throws Exception {
+        if(sysUserMapper.selectById(id) == null) {
+            throw new Exception("改用户不存在");
+        }
+        if(sysUserMapper.deleteById(id) != 1) {
+            throw new Exception("删除用户失败");
+        }
+        QueryWrapper<SysUserRole> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_id", id);
+        sysUserRoleMapper.delete(wrapper);
+    }
+
+    @Override
+    public boolean insert(SysUser sysUser) throws Exception {
+        QueryWrapper<SysUser> wrapper = new QueryWrapper<>();
+        wrapper.eq("username", sysUser.getUsername());
+        List<SysUser> sysUserList = sysUserMapper.selectList(wrapper);
+        if(sysUserList.size() > 0) {
+            throw new Exception("该用户名已存在");
+        }
+        return this.save(sysUser);
+    }
+
+    @Override
+    public boolean make(SysUser sysUser) throws Exception {
+        SysUser s = sysUserMapper.selectById(sysUser.getId());
+        if(s == null) {
+            throw new Exception("该用户不存在，无法修改");
+        }
+
+        List<SysUser> sysUserList = sysUserMapper.selectList(new QueryWrapper<SysUser>().eq("username", sysUser.getUsername()));
+        if(sysUserList.size() > 0 && !sysUser.getUsername().equals(s.getUsername())) {
+            throw new Exception("修改后的用户名已存在，无法修改");
+        }
+        return this.updateById(sysUser);
+    }
+
+    @Override
+    public boolean updatePwd(Long id, String oldPwd, String newPwd, String newAgainPwd) throws Exception {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String pwd = null;
+        SysUser sysUser = sysUserMapper.findById(id);
+        pwd = sysUser.getPassword();
+        if(oldPwd.equals(newPwd)) {
+            throw new Exception("新旧密码不能相同");
+        }
+        if(!newAgainPwd.equals(newPwd)) {
+            throw new Exception("您输入的两次密码不一致");
+        }
+        //oldPwd = encoder.encode(oldPwd);
+        if(!encoder.matches(oldPwd, pwd)) {
+            throw new Exception("您输入的旧密码不正确");
+        }
+        newPwd = encoder.encode(newPwd);
+        sysUser.setPassword(newPwd);
+        return sysUserMapper.updateById(sysUser) == 1;
+    }
+
+    @Override
+    public List<SysUser> findAll() {
+        return sysUserMapper.findAll();
+    }
+
+    @Override
+    public SysUser findById(Long id) {
+        return sysUserMapper.findById(id);
+    }
+
+    @Override
+    public List<Long> findRolesByUserId(Long userId) {
+        List<Long> roles = sysUserRoleMapper.selectList(new QueryWrapper<SysUserRole>().eq("user_id", userId))
+                .stream()
+                .map(SysUserRole::getRoleId)
+                .collect(Collectors.toList());
+        return roles;
     }
 }
 

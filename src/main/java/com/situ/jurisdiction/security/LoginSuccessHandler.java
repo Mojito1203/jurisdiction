@@ -31,11 +31,19 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         ServletOutputStream out = response.getOutputStream();
         HashMap<String, Object> map = new HashMap<>();
         SysUser sysUser = sysUserService.getSysUser(username);
+        R result =null;
+        if(sysUser.getStatu()==0){
+            result=R.error("已禁用");
+            out.write(JSONUtil.toJsonStr(result).getBytes("UTF-8"));
+            out.flush();
+            out.close();
+            return;
+        }
         map.put("id", sysUser.getId());
         map.put("username", username);
         //生成JWT
         String jwt = JwtUtils.generateJwt(map);
-        R result = R.ok("登录成功", jwt);
+        result=R.ok("登录成功", jwt);
         out.write(JSONUtil.toJsonStr(result).getBytes("UTF-8"));
         out.flush();
         out.close();
